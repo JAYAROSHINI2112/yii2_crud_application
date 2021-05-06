@@ -28,32 +28,8 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'View', 'url' => ['/student/index']]
-        
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[]=[
-            'label' => 'Logout('.yii::$app->user->identity->username.')',
-            'url' =>['/site/logout'],
-            'linkOptions'=>['data-method'=>'post']
-        ];
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+   
+<?php echo $this->render('index') ?> 
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -63,14 +39,9 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
+ 
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

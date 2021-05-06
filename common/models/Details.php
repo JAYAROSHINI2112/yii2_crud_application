@@ -3,14 +3,12 @@
 namespace common\models;
 
 use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "{{%student}}".
+ * This is the model class for table "{{%details}}".
  *
  * @property int $id
- * @property string $s_name
+ * @property string $name
  * @property string $reg_no
  * @property string $email
  * @property string $phone_no
@@ -22,14 +20,14 @@ use yii\behaviors\TimestampBehavior;
  * @property User $createdBy
  * @property User $updatedBy
  */
-class Student extends \yii\db\ActiveRecord
+class Details extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%student}}';
+        return '{{%details}}';
     }
 
     /**
@@ -38,9 +36,9 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['s_name', 'reg_no', 'email', 'phone_no'], 'required'],
+            [['name', 'reg_no', 'email', 'phone_no'], 'required'],
             [['created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['s_name', 'email'], 'string', 'max' => 100],
+            [['name', 'email'], 'string', 'max' => 100],
             [['reg_no', 'phone_no'], 'string', 'max' => 30],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
@@ -54,7 +52,7 @@ class Student extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            's_name' => 'S Name',
+            'name' => 'Name',
             'reg_no' => 'Reg No',
             'email' => 'Email',
             'phone_no' => 'Phone No',
@@ -64,17 +62,7 @@ class Student extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
         ];
     }
-     
-    public function behaviors()
-    {
-    return [
-            TimestampBehavior::class,
-            [
-                'class'=>BlameableBehavior::class
 
-            ]
-            ];
-        }
     /**
      * Gets query for [[CreatedBy]].
      *
@@ -97,10 +85,10 @@ class Student extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return \common\models\query\StudentQuery the active query used by this AR class.
+     * @return \common\models\query\DetailsQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \common\models\query\StudentQuery(get_called_class());
+        return new \common\models\query\DetailsQuery(get_called_class());
     }
 }
